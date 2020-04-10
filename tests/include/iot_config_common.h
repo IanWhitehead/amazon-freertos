@@ -253,7 +253,7 @@ extern const struct IotNetworkInterface * IotTestNetwork_GetNetworkInterface( vo
 /* Allow the network serializer to be chosen by at runtime. */
 struct IotMqttSerializer;
 extern const struct IotMqttSerializer * IotTestNetwork_GetSerializer( void );
-#define IOT_TEST_MQTT_SERIALIZER             IotTestNetwork_GetSerializer()
+#define IOT_TEST_MQTT_SERIALIZER                     IotTestNetwork_GetSerializer()
 
 /* Retry the MQTT Connections in the MQTT System unit tests for all hardware
  * platforms supported in FreeRTOS.
