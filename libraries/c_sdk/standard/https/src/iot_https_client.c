@@ -95,6 +95,18 @@
 
 /*-----------------------------------------------------------*/
 
+
+/**
+ * @brief Definition of HTTP method enum to strings array.
+ */
+const char * _pHttpsMethodStrings[] =
+{
+    "GET",
+    "HEAD",
+    "PUT",
+    "POST"
+};
+
 /**
  * @brief Minimum size of the request user buffer.
  *
@@ -1712,7 +1724,7 @@ static IotHttpsReturnCode_t _sendHttpsHeaders( _httpsConnection_t * pHttpsConnec
                                ( unsigned int ) contentLength );
     }
 
-    if( ( numWritten < 0 ) || ( numWritten >= sizeof( contentLengthHeaderStr ) ) )
+    if( ( numWritten < 0 ) || ( numWritten >= ( ( int ) sizeof( contentLengthHeaderStr ) ) ) )
     {
         IotLogError( "Internal error in snprintf() in _sendHttpsHeaders(). Error code %d.", numWritten );
         HTTPS_SET_AND_GOTO_CLEANUP( IOT_HTTPS_INTERNAL_ERROR );
@@ -1779,6 +1791,10 @@ static IotHttpsReturnCode_t _parseHttpsMessage( _httpParserInfo_t * pHttpParserI
     size_t parsedBytes = 0;
     const char * pHttpParserErrorDescription = NULL;
     http_parser * pHttpParser = &( pHttpParserInfo->responseParser );
+
+    /* Disable -Wunused-but-set-variable for local variables used for logging. */
+    ( void ) parsedBytes;
+    ( void ) pHttpParserErrorDescription;
 
     IotLogDebug( "Now parsing HTTP message buffer to process a response." );
     parsedBytes = pHttpParserInfo->parseFunc( pHttpParser, &_httpParserSettings, pBuf, len );
@@ -2016,6 +2032,9 @@ static IotHttpsReturnCode_t _flushHttpsNetworkData( _httpsConnection_t * pHttpsC
     IotHttpsReturnCode_t parserStatus = IOT_HTTPS_OK;
     IotHttpsReturnCode_t networkStatus = IOT_HTTPS_OK;
     size_t numBytesRecv = 0;
+
+    /* Disable -Wunused-but-set-variable for local variables used for logging. */
+    ( void ) pHttpParserErrorDescription;
 
     /* Even if there is not body, the parser state will become body complete after the headers finish. */
     while( pHttpsResponse->parserState < PARSER_STATE_BODY_COMPLETE )
@@ -3254,6 +3273,10 @@ IotHttpsReturnCode_t IotHttpsClient_ReadHeader( IotHttpsResponseHandle_t respHan
     IotHttpsResponseBufferState_t savedBufferState = PROCESSING_STATE_NONE;
     IotHttpsResponseParserState_t savedParserState = PARSER_STATE_NONE;
     size_t numParsed = 0;
+
+    /* Disable -Wunused-but-set-variable for local variables used for logging. */
+    ( void ) numParsed;
+    ( void ) pHttpParserErrorDescription;
 
     HTTPS_ON_NULL_ARG_GOTO_CLEANUP( respHandle );
     HTTPS_ON_NULL_ARG_GOTO_CLEANUP( pName );

@@ -63,6 +63,7 @@ GLOBAL_INCLUDES +=  $(AMAZON_FREERTOS_PATH)tests/include \
                     $(AFR_THIRDPARTY_PATH)jsmn \
                     $(AFR_THIRDPARTY_PATH)pkcs11 \
                     $(AFR_THIRDPARTY_PATH)lwip/src/include/lwip \
+                    $(AFR_THIRDPARTY_PATH)mbedtls_config \
                     $(AFR_THIRDPARTY_PATH)mbedtls/include \
                     $(AFR_THIRDPARTY_PATH)mbedtls_utils \
                     $(AMAZON_FREERTOS_PATH)freertos_kernel/include \
@@ -130,6 +131,7 @@ $(NAME)_SOURCES    := $(AMAZON_FREERTOS_PATH)vendors/cypress/boards/$(PLATFORM)/
                       $(AFR_THIRDPARTY_PATH)tinycbor/cborparser.c \
                       $(AFR_THIRDPARTY_PATH)tinycbor/cborparser_dup_string.c \
                       $(AFR_THIRDPARTY_PATH)tinycbor/cborpretty.c \
+                      $(AFR_THIRDPARTY_PATH)tinycbor/cborpretty_stdio.c \
                       $(AFR_ABSTRACTIONS_PATH)wifi/test/iot_test_wifi.c \
                       $(AFR_FREERTOS_PLUS_STANDARD_PATH)tls/test/iot_test_tls.c \
                       $(AFR_ABSTRACTIONS_PATH)secure_sockets/test/iot_test_tcp.c \

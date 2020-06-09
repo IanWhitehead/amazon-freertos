@@ -443,7 +443,7 @@ static int prvPrivateKeySigningCallback( void * pvContext,
  * @return Zero on success.
  */
 static int prvReadCertificateIntoContext( TLSContext_t * pxTlsContext,
-                                          const char * pcLabelName,
+                                          char * pcLabelName,
                                           CK_OBJECT_CLASS xClass,
                                           mbedtls_x509_crt * pxCertificateContext )
 {
@@ -771,9 +771,6 @@ BaseType_t TLS_Connect( void * pvContext )
 {
     BaseType_t xResult = 0;
     TLSContext_t * pxCtx = ( TLSContext_t * ) pvContext; /*lint !e9087 !e9079 Allow casting void* to other types. */
-
-    /* Ensure that the FreeRTOS heap is used. */
-    CRYPTO_ConfigureHeap();
 
     /* Initialize mbedTLS structures. */
     mbedtls_ssl_init( &pxCtx->xMbedSslCtx );

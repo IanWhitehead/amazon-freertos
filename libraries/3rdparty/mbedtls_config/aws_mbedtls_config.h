@@ -193,6 +193,16 @@
  */
 #define MBEDTLS_PLATFORM_MEMORY
 
+#ifdef CONFIG_MEDTLS_USE_AFR_MEMORY
+    #include <stddef.h>
+
+    extern void * pvCalloc( size_t xNumElements,
+                          size_t xSize ) ;
+    extern void vPortFree( void *pv );
+    #define MBEDTLS_PLATFORM_CALLOC_MACRO pvCalloc
+    #define MBEDTLS_PLATFORM_FREE_MACRO   vPortFree
+#endif
+
 /**
  * \def MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
  *
@@ -590,7 +600,7 @@
  *
  * Enable Cipher Block Chaining mode (CBC) for symmetric ciphers.
  */
-#define MBEDTLS_CIPHER_MODE_CBC
+//#define MBEDTLS_CIPHER_MODE_CBC
 
 /**
  * \def MBEDTLS_CIPHER_MODE_CFB
@@ -1258,7 +1268,7 @@
  *
  * Enable the checkup functions (*_self_test).
  */
-#define MBEDTLS_SELF_TEST
+//#define MBEDTLS_SELF_TEST
 
 /**
  * \def MBEDTLS_SHA256_SMALLER
@@ -1333,7 +1343,7 @@
  *
  * Comment this macro to disable support for Encrypt-then-MAC
  */
-#define MBEDTLS_SSL_ENCRYPT_THEN_MAC
+//#define MBEDTLS_SSL_ENCRYPT_THEN_MAC
 
 /** \def MBEDTLS_SSL_EXTENDED_MASTER_SECRET
  *
@@ -1676,7 +1686,7 @@
  *
  * Comment this to disable run-time checking and save ROM space
  */
-#define MBEDTLS_VERSION_FEATURES
+//#define MBEDTLS_VERSION_FEATURES
 
 /**
  * \def MBEDTLS_X509_ALLOW_EXTENSIONS_NON_V3
@@ -2889,7 +2899,7 @@
  *
  * This module provides run-time version information.
  */
-#define MBEDTLS_VERSION_C
+//#define MBEDTLS_VERSION_C
 
 /**
  * \def MBEDTLS_X509_USE_C

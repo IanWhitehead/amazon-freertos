@@ -29,42 +29,37 @@
 
 #include "iot_test_common_io_internal.h"
 
+#if defined( IOT_TEST_COMMON_IO_UART_SUPPORTED ) && ( IOT_TEST_COMMON_IO_UART_SUPPORTED >= 1 )
 /* UART */
-extern uint8_t uctestIotUartPort;
+    void SET_TEST_IOT_UART_CONFIG( int testSet )
+    {
+        uctestIotUartPort = uartTestPort[ testSet ];
+    }
+#endif
 
-void SET_TEST_IOT_UART_CONFIG( int testSet )
-{
-    uctestIotUartPort = uartTestPort[ testSet ];
-}
+#if defined( IOT_TEST_COMMON_IO_I2C_SUPPORTED ) && ( IOT_TEST_COMMON_IO_I2C_SUPPORTED >= 1 )
 
 /* I2C */
-extern uint8_t uctestIotI2CSlaveAddr;
-extern uint8_t uctestIotI2CDeviceRegister;
-extern uint8_t uctestIotI2CWriteVal;
-extern uint8_t uctestIotI2CInstanceIdx;
-extern uint8_t uctestIotI2CInstanceNum;
+    void SET_TEST_IOT_I2C_CONFIG( int testSet )
+    {
+        uctestIotI2CSlaveAddr = i2cTestSlaveAddr[ testSet ];
+        uctestIotI2CDeviceRegister = i2cTestDeviceRegister[ testSet ];
+        uctestIotI2CWriteVal = i2cTestWriteVal[ testSet ];
+        uctestIotI2CInstanceIdx = i2cTestInstanceIdx[ testSet ];
+        uctestIotI2CInstanceNum = i2cTestInstanceNum[ testSet ];
+    }
 
-void SET_TEST_IOT_I2C_CONFIG( int testSet )
-{
-    uctestIotI2CSlaveAddr = i2cTestSlaveAddr[ testSet ];
-    uctestIotI2CDeviceRegister = i2cTestDeviceRegister[ testSet ];
-    uctestIotI2CWriteVal = i2cTestWriteVal[ testSet ];
-    uctestIotI2CInstanceIdx = i2cTestInstanceIdx[ testSet ];
-    uctestIotI2CInstanceNum = i2cTestInstanceNum[ testSet ];
-}
+#endif /* if defined( IOT_TEST_COMMON_IO_I2C_SUPPORTED ) && ( IOT_TEST_COMMON_IO_I2C_SUPPORTED >= 1 ) */
 
+#if defined( IOT_TEST_COMMON_IO_SPI_SUPPORTED ) && ( IOT_TEST_COMMON_IO_SPI_SUPPORTED >= 1 )
 /* SPI */
-extern uint32_t ultestIotSpiInstance;
-extern IotSPIMode_t xtestIotSPIDefaultConfigMode;
-extern IotSPIBitOrder_t xtestIotSPIDefaultconfigBitOrder;
-extern uint32_t ultestIotSPIFrequency;
-extern uint32_t ultestIotSPIDummyValue;
+    void SET_TEST_IOT_SPI_CONFIG( int testSet )
+    {
+        ultestIotSpiInstance = spiTestPort[ testSet ];
+        xtestIotSPIDefaultConfigMode = spiIotMode[ testSet ];
+        xtestIotSPIDefaultconfigBitOrder = spiIotSpitBitOrder[ testSet ];
+        ultestIotSPIFrequency = spiIotFrequency[ testSet ];
+        ultestIotSPIDummyValue = spiIotDummyValue[ testSet ];
+    }
 
-void SET_TEST_IOT_SPI_CONFIG(int testSet)
-{
-    ultestIotSpiInstance = spiTestPort[ testSet ] ;
-    xtestIotSPIDefaultConfigMode = spiIotMode[ testSet ];
-    xtestIotSPIDefaultconfigBitOrder = spiIotSpitBitOrder[ testSet ];
-    ultestIotSPIFrequency = spiIotFrequency[ testSet ];
-    ultestIotSPIDummyValue = spiIotDummyValue[ testSet ];
-}
+#endif /* if defined( IOT_TEST_COMMON_IO_SPI_SUPPORTED ) && ( IOT_TEST_COMMON_IO_SPI_SUPPORTED >= 1 ) */

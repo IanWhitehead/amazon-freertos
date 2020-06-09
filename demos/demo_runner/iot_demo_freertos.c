@@ -153,7 +153,8 @@ static void _onNetworkStateChangeCallback( uint32_t network,
                                                     pNetworkInterface );
         }
     }
-    else if( ( state == eNetworkStateDisabled ) && ( demoConnectedNetwork == network ) )
+    else if( ( ( state == eNetworkStateDisabled ) || ( state == eNetworkStateUnknown ) ) &&
+             ( demoConnectedNetwork == network ) )
     {
         if( pDemoContext->networkDisconnectedCallback != NULL )
         {
@@ -255,7 +256,7 @@ static int _initialize( demoContext_t * pContext )
     {
         if( AwsIotNetworkManager_EnableNetwork( configENABLED_NETWORKS ) != configENABLED_NETWORKS )
         {
-            IotLogError( "Failed to intialize all the networks configured for the device." );
+            IotLogError( "Failed to initialize all the networks configured for the device." );
             status = EXIT_FAILURE;
         }
     }
@@ -267,7 +268,7 @@ static int _initialize( demoContext_t * pContext )
 
         if( demoConnectedNetwork == AWSIOT_NETWORK_TYPE_NONE )
         {
-            /* Network not yet initialized. Block for a network to be intialized. */
+            /* Network not yet initialized. Block for a network to be initialized. */
             IotLogInfo( "No networks connected for the demo. Waiting for a network connection. " );
             demoConnectedNetwork = _waitForDemoNetworkConnection( pContext );
         }
@@ -461,6 +462,7 @@ void runDemoTask( void * pArgument )
 
         /* Unused Parameters */
         ( void ) xTask;
+        ( void ) pcTaskName;
 
         /* Loop forever */
         for( ; ; )

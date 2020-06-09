@@ -83,10 +83,11 @@ static void prvOutputMessage();
 static void prvSpiAsyncCallback( IotSPITransactionStatus_t xStatus,
                                  void * pvUserContext )
 {
-    BaseType_t xHigherPriorityTaskWoken;
+    /* Disable unused parameter warning. */
+    ( void ) xStatus;
+    ( void ) pvUserContext;
 
-    xSemaphoreGiveFromISR( xtestIotSPISemaphore, &xHigherPriorityTaskWoken );
-    portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
+    xSemaphoreGiveFromISR( xtestIotSPISemaphore, NULL );
 }
 /*-----------------------------------------------------------*/
 
